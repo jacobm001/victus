@@ -11,13 +11,15 @@
 
 	$recipes = [];
 	
-	foreach($result as $row)
-	{
-		$recipes[] = new Recipe($row["recipe_id"], $row["recipe_name"], 
-			$row["recipe_yields"], $row["recipe_notes"], $row["recipe_directions"]);
+	if( $result != Null ) {
+		foreach($result as $row)
+		{
+			$recipes[] = new Recipe($row["recipe_id"], $row["recipe_name"], 
+				$row["recipe_yields"], $row["recipe_notes"], $row["recipe_directions"]);
 
-		end($recipes)->set_tag($row["recipe_tags"]);
-		end($recipes)->set_ingr($row["recipe_ingredients"]);
+			end($recipes)->set_tag($row["recipe_tags"]);
+			end($recipes)->set_ingr($row["recipe_ingredients"]);
+		}
 	}
 
 	echo json_encode($recipes);
