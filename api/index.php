@@ -3,12 +3,10 @@
 	//ini_set('display_startup_errors', 1);
 	//error_reporting(E_ALL); 
 
-	include 'recipe.php';
-
-	$db = new PDO('sqlite:data.db');
+	include 'start.php';
+	include 'recipe.php';	
 	
 	$query = "select * from one_line_recipes";
-
 	$result = $db->query($query);
 
 	$recipes = [];
