@@ -1,4 +1,4 @@
-api/data.db
+data/data.db
 scratch/*
 *.swp
 *.swo
