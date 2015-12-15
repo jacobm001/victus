@@ -10,3 +10,11 @@ body {
 .content {
 	padding-bottom: 20px;
 }
+
+.hidden {
+	display: none;
+}
+
+.recipe_card {
+	background-color: #e7e7e7;
+}

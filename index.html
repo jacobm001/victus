@@ -45,17 +45,26 @@
 					<!-- </div> form group -->
 			</div> <!-- content -->
 
-			<div class="content">
-				<ul id="blah" class="list-group">
-				</ul>
+			<div id="recipe_card_template" class="recipe_card col-lg-3 col-md-4 col-sm-6 col-xs-12 hidden">
+				<h4 class="card_title"></h4>
+				<p class="card_desc"></p>
+			</div>
+
+			<div class="row" id="list">
 			</div>
 		</div>
 	</body>
 
 	<script>
 		$.getJSON("api/", function(data) {
+			var t = $("#recipe_card_template");
 			for(var i = 0; i < data.length; i++) {
-				$("#blah").append("<li class=\"list-group-item\">" + data[i].name + "</li>");
+				var c = t.clone();
+				c.attr("id", "recipe_card_" + i);
+				c.find(".card_title").text(data[i].name);
+				c.find(".card_desc").text(data[i].notes);
+				c.removeClass("hidden");
+				c.appendTo("#list");
 			}
 		});
 	</script>
