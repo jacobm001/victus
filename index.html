@@ -21,13 +21,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="http://getbootstrap.com/examples/starter-template/#">Cibum</a>
+					<a class="navbar-brand" href="">Victus</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="http://getbootstrap.com/examples/starter-template/#">Home</a></li>
-						<li><a href="http://getbootstrap.com/examples/starter-template/#about">About</a></li>
-						<li><a href="http://getbootstrap.com/examples/starter-template/#contact">Contact</a></li>
+						<li class="active"><a href="">Home</a></li>
+						<li><a href="">About</a></li>
+						<li><a href="">Contact</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 		  </div>
@@ -52,10 +52,29 @@
 
 			<div class="row" id="list">
 			</div>
+
+			<div class="row" id="disp_recipe">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1 id="disp_recipe_name">
+					</h1>
+				</div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<ul id="disp_recipe_ingredients" class="list-group">
+					</ul>
+				</div>
+				
+				<div id="disp_recipe_directions" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				</div>
+			</div>
 		</div>
 	</body>
 
 	<script>
+		var disp_recipe = function(id) {
+			
+		}
+		
 		$.getJSON("api/", function(data) {
 			var t = $("#recipe_card_template");
 			for(var i = 0; i < data.length; i++) {
