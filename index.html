@@ -45,7 +45,7 @@
 					<!-- </div> form group -->
 			</div> <!-- content -->
 
-			<div id="recipe_card_template" class="recipe_card col-lg-3 col-md-4 col-sm-6 col-xs-12 hidden">
+			<div id="recipe_card_template" class="recipe_card col-lg-4 col-md-6 col-sm-6 col-xs-12 hidden">
 				<h4 class="card_title"></h4>
 				<p class="card_desc"></p>
 			</div>
@@ -53,7 +53,7 @@
 			<div class="row" id="list">
 			</div>
 
-			<div class="row" id="disp_recipe">
+			<div class="row hidden" id="disp_recipe">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 id="disp_recipe_name">
 					</h1>
@@ -72,8 +72,8 @@
 
 	<script>
 		var disp_recipe = function(id) {
-			
-		}
+			console.log(id);
+		};
 		
 		$.getJSON("api/", function(data) {
 			var t = $("#recipe_card_template");
@@ -82,6 +82,7 @@
 				c.attr("id", "recipe_card_" + i);
 				c.find(".card_title").text(data[i].name);
 				c.find(".card_desc").text(data[i].notes);
+                c.attr("onclick", "disp_recipe(" + i + ")");
 				c.removeClass("hidden");
 				c.appendTo("#list");
 			}
