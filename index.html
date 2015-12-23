@@ -104,6 +104,7 @@
             display.find("#disp_recipe_directions").text(recipes[id].directions);
             display.find("#disp_recipe_yields").text(recipes[id].yields);
 
+			ingr.text("");
             for(var i = 0; i < recipes[id].ingredients.length; ++i) {
                 var str = "<li class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\">";
                 str += recipes[id].ingredients[i];
