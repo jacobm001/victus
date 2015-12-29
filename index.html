@@ -24,8 +24,8 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a onclick="disp_list()">Home</a></li>
-                        <li><a onclick="disp_create()">Create</a></li>
+						<li id="menu_home" class="active"><a onclick="disp_list()">Home</a></li>
+                        <li id="menu_create"><a onclick="disp_create()">Create</a></li>
 						<!--<li><a href="">About</a></li>-->
 						<!--<li><a href="">Contact</a></li>-->
 					</ul>
@@ -125,6 +125,12 @@
 
 	<script>
         var recipes;
+        var set_active_menu = function(option) {
+            var str = "#menu_" + option;
+            $(".nav .active").toggleClass("active");
+            $(str).toggleClass("active");
+        };
+
 		var disp_recipe = function(id) {
             var list    = $("#list");
             var display = $("#disp_recipe");
@@ -152,12 +158,14 @@
 
             $(".view-visible").toggleClass("view-visible");
             create.toggleClass("view-visible");
+            set_active_menu("create");
         };
 
         var disp_list = function() {
             var list    = $("#list");
             $(".view-visible").toggleClass("view-visible");
             list.toggleClass("view-visible");
+            set_active_menu("home");
         };
 		
 		$.getJSON("api/", function(data) {
