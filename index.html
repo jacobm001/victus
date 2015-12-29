@@ -131,6 +131,11 @@
             $(str).toggleClass("active");
         };
 
+        var set_active_view = function(option) {
+            $(".view-visible").toggleClass("view-visible");
+            $("#" + option).toggleClass("view-visible");
+        };
+
 		var disp_recipe = function(id) {
             var list    = $("#list");
             var display = $("#disp_recipe");
