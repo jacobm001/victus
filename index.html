@@ -24,10 +24,9 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li id="menu_home" class="active"><a onclick="disp_list()">Home</a></li>
-                        <li id="menu_create"><a onclick="disp_create()">Create</a></li>
-						<!--<li><a href="">About</a></li>-->
-						<!--<li><a href="">Contact</a></li>-->
+						<li id="menu_home" class="active"><a onclick="v.disp_list()">Home</a></li>
+                        <li id="menu_create"><a onclick="v.disp_create()">Create</a></li>
+                        <li id="menu_recipe"><a onclick="v.disp_editor()">Edit</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 		  </div>
@@ -35,8 +34,8 @@
 
 		<div class="container container-top">
 			<div id="recipe_card_template" class="recipe_card col-lg-4 col-md-6 col-sm-6 col-xs-12 hidden">
-				<h4 class="card_title"></h4>
-				<p class="card_desc"></p>
+                <h4 class="card_title"></h4>
+                <!--<p class="card_desc"></p>-->
 			</div>
 
 			<div class="row view view-visible" id="list">
@@ -79,7 +78,7 @@
                 </div>
 			</div>
 
-            <div class="row view" id="create_recipe">
+            <div class="row view" id="create">
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label for="create_recipe_id">Name</label>
@@ -122,69 +121,5 @@
             </div>
 		</div>
 	</body>
-
-	<script>
-        var recipes;
-        var set_active_menu = function(option) {
-            var str = "#menu_" + option;
-            $(".nav .active").toggleClass("active");
-            $(str).toggleClass("active");
-        };
-
-        var set_active_view = function(option) {
-            $(".view-visible").toggleClass("view-visible");
-            $("#" + option).toggleClass("view-visible");
-        };
-
-		var disp_recipe = function(id) {
-            var list    = $("#list");
-            var display = $("#disp_recipe");
-            var ingr    = display.find("#disp_recipe_ingredients");
-
-            display.find("#disp_recipe_name").text(recipes[id].name);
-            display.find("#disp_recipe_directions").text(recipes[id].directions);
-            display.find("#disp_recipe_yields").text(recipes[id].yields);
-
-			ingr.empty("");
-            for(var i = 0; i < recipes[id].ingredients.length; ++i) {
-                var str = "<li class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\">";
-                str += recipes[id].ingredients[i];
-                str += "</li>";
-                ingr.append(str);
-            }
-
-            $(".view-visible").toggleClass("view-visible");
-            display.toggleClass("view-visible");
-
-		};
-
-        var disp_create = function() {
-            var create = $("#create_recipe");
-
-            $(".view-visible").toggleClass("view-visible");
-            create.toggleClass("view-visible");
-            set_active_menu("create");
-        };
-
-        var disp_list = function() {
-            var list    = $("#list");
-            $(".view-visible").toggleClass("view-visible");
-            list.toggleClass("view-visible");
-            set_active_menu("home");
-        };
-		
-		$.getJSON("api/", function(data) {
-            recipes = data;
-			var t = $("#recipe_card_template");
-			for(var i = 0; i < data.length; i++) {
-                var c = t.clone();
-                c.attr("id", "recipe_card_" + i);
-                c.find(".card_title").text(data[i].name);
-                c.find(".card_desc").text(data[i].notes);
-                c.attr("onclick", "disp_recipe(" + i + ")");
-                c.removeClass("hidden");
-                c.appendTo("#list");
-            }
-		});
-	</script>
+    <script src="app.js"></script>
 </html>
