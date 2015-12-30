@@ -53,7 +53,7 @@ function victus() {
                 c.attr("id", "recipe_card_" + i);
                 c.find(".card_title").text(data[i].name);
                 c.find(".card_desc").text(data[i].notes);
-                c.attr("onclick", "disp_recipe(" + i + ")");
+                c.attr("onclick", "v.disp_recipe(" + i + ")");
                 c.removeClass("hidden");
                 c.appendTo("#list");
             }
