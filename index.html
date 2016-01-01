@@ -11,6 +11,11 @@
 	</head>
 	
 	<body>
+        <div id="recipe_card_template" class="recipe_card col-xs-12 col-sm-6 col-md-6 col-lg-4 hidden">
+            <h4 class="card_title"></h4>
+            <!--<p class="card_desc"></p>-->
+        </div>
+
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -28,25 +33,18 @@
                         <li id="menu_create"><a onclick="v.disp_create()">Create</a></li>
                         <li id="menu_recipe"><a onclick="v.disp_editor()">Edit</a></li>
 					</ul>
-				</div><!--/.nav-collapse -->
-		  </div>
+				</div> <!--/.nav-collapse -->
+		    </div>
 		</nav>
 
 		<div class="container container-top">
-			<div id="recipe_card_template" class="recipe_card col-lg-4 col-md-6 col-sm-6 col-xs-12 hidden">
-                <h4 class="card_title"></h4>
-                <!--<p class="card_desc"></p>-->
-			</div>
-
 			<div class="row view view-visible" id="list">
-                <div class="content">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </div>
-                    </div> <!-- input group -->
-                </div> <!-- content -->
+                  <!-- <div class="input-group">
+                     <input type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
+                     <div class="input-group-addon">
+                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                     </div>
+                 </div> -->
 			</div>
 
 			<div class="row view" id="disp_recipe">
@@ -78,8 +76,10 @@
                 </div>
 			</div>
 
+            <!--
             <div class="row view" id="create">
-                <div class="col-lg-12">
+                <div class="hidden-xs col-sm-2"></div>
+                <div class="col-xs-12 col-sm-8">
                     <div class="form-group">
                         <label for="create_recipe_id">Name</label>
                         <input type="text" class="form-control" id="create_recipe_id">
@@ -118,8 +118,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="hidden-xs col-sm-2"></div>
+            </div> -->
 		</div>
+
 	</body>
     <script src="app.js"></script>
 </html>

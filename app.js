@@ -59,7 +59,7 @@ function victus() {
             }
         });
     };
-};
+}
 
 var v = new victus();
 v.get_recipes();

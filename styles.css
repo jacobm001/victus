@@ -1,17 +1,22 @@
 body {
-    padding-top: 50px;
+    padding-top: 80px;
     background-color: #e7e7e7;
 }
 
 .container-top {
-    padding: 40px 15px;
+    /*padding: 40px 15px;*/
     text-align: center;
     position: relative;
 }
 
+#create {
+    text-align: left;
+}
+
+
+
 .view {
     position: absolute;
-    left: 0;
     opacity: 0;
     -webkit-transition: opacity 1s ease;
     -moz-transition: opacity 1s ease;
@@ -33,10 +38,9 @@ body {
 }
 
 .recipe_card {
-    border-left-color: blue;
-    border-left-style: inset;
-    background-color: white;
-    margin-bottom: 5px;
+    /*border-left-color: blue;*/
+    /*border-left-style: inset;*/
+    /*background-color: white;*/
 }
 
 .card_title {
