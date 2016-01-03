@@ -57,7 +57,7 @@ function victus() {
                     c.attr("id", "recipe_section_" + r);
                     c.find(".section-header").text(r);
                 }
-                
+
                 c.find('.list-unstyled').append(
                     $('<li>').append(
                         $('<a>').append(data[i].name)
