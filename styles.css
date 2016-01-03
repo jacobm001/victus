@@ -13,7 +13,18 @@ body {
     text-align: left;
 }
 
+.list-alpha {
+    text-align: left;
+}
 
+.section-header {
+    width: 100%;
+    text-align: left;
+    border-bottom: solid;
+    border-color: darkslategray;
+    color: darkslategray;
+    border-bottom-width: 2px;
+}
 
 .view {
     position: absolute;

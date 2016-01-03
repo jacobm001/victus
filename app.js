@@ -47,15 +47,27 @@ function victus() {
     this.get_recipes = function() {
         $.getJSON("api/", function(data) {
             recipes = data;
-            var t = $("#recipe_card_template");
+            var t = $("#recipe_section_template");
+            var r = null;
             for(var i = 0; i < data.length; i++) {
-                var c = t.clone();
-                c.attr("id", "recipe_card_" + i);
-                c.find(".card_title").text(data[i].name);
-                c.find(".card_desc").text(data[i].notes);
-                c.attr("onclick", "v.disp_recipe(" + i + ")");
-                c.removeClass("hidden");
-                c.appendTo("#list");
+                var c;
+                if( r == null || r != data[i].name.charAt(0) ) {
+                    r = data[i].name.charAt(0);
+                    c = t.clone();
+                    c.attr("id", "recipe_section_" + r);
+                    c.find(".section-header").text(r);
+                }
+                
+                c.find('.list-unstyled').append(
+                    $('<li>').append(
+                        $('<a>').append(data[i].name)
+                    ).attr("onclick", "v.disp_recipe(" + i + ")")
+                );
+
+                if( i == data.length-1 || data[i+1].name.charAt(0) != r ) {
+                    c.removeClass("hidden");
+                    $("#content").append(c);
+                }
             }
         });
     };
