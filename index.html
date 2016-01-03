@@ -16,9 +16,15 @@
             <!--<p class="card_desc"></p>-->
         </div>
 
-		<div id="recipe_section_template" class="recipe_section col-xs-12 col-sm-6 col-md-4 col-lg-3 list-alpha hidden">
+		<div id="recipe_section_template_sm" class="recipe_section col-xs-12 col-sm-6 col-md-4 col-lg-3 list-alpha hidden">
 			<h1 class="section-header"></h1>
 			<ul class="list-unstyled">
+			</ul>
+		</div>
+
+		<div id="recipe_section_template_lg" class="recipe_section col-xs-12 col-sm-6 col-md-6 col-lg-6 list-alpha hidden">
+			<h1 class="section-header"></h1>
+			<ul class="list-unstyled row">
 			</ul>
 		</div>
 
@@ -37,7 +43,7 @@
 					<ul class="nav navbar-nav">
 						<li id="menu_home" class="active"><a onclick="v.disp_list()">Home</a></li>
                         <li id="menu_create"><a onclick="v.disp_create()">Create</a></li>
-                        <li id="menu_recipe"><a onclick="v.disp_editor()">Edit</a></li>
+                        <li id="menu_recipe" class="hidden"><a onclick="v.disp_editor()">Edit</a></li>
 					</ul>
 				</div> <!--/.nav-collapse -->
 		    </div>

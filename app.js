@@ -47,22 +47,39 @@ function victus() {
     this.get_recipes = function() {
         $.getJSON("api/", function(data) {
             recipes = data;
-            var t = $("#recipe_section_template");
+            var ts = $("#recipe_section_template_sm");
+            var tl = $("#recipe_section_template_lg");
             var r = null;
             for(var i = 0; i < data.length; i++) {
                 var c;
                 if( r == null || r != data[i].name.charAt(0) ) {
+                    var j = 0;
                     r = data[i].name.charAt(0);
-                    c = t.clone();
+
+                    while( r == data[j+i].name.charAt(0) ) {
+                        j++;
+                    }
+
+                    if( j < 15 )
+                        c = ts.clone();
+                    else
+                        c = tl.clone();
+
                     c.attr("id", "recipe_section_" + r);
                     c.find(".section-header").text(r);
                 }
 
-                c.find('.list-unstyled').append(
-                    $('<li>').append(
-                        $('<a>').append(data[i].name)
-                    ).attr("onclick", "v.disp_recipe(" + i + ")")
-                );
+                var li = $('<li>');
+                var a  = $('<a>');
+
+                a.append(data[i].name);
+                a.attr("onclick", "v.disp_recipe(" + i + ")");
+                li.append(a);
+
+                if( j >= 15 )
+                    li.addClass("col-sm-12 col-sm-12 col-md-6 col-lg-6");
+
+                c.find('.list-unstyled').append(li);
 
                 if( i == data.length-1 || data[i+1].name.charAt(0) != r ) {
                     c.removeClass("hidden");
