@@ -48,6 +48,7 @@ function victus() {
         $.getJSON("api/", function(data) {
             recipes = data;
             var ts = $("#recipe_section_template_sm");
+            var tm = $("#recipe_section_template_md");
             var tl = $("#recipe_section_template_lg");
             var r = null;
             for(var i = 0; i < data.length; i++) {
@@ -56,12 +57,16 @@ function victus() {
                     var j = 0;
                     r = data[i].name.charAt(0);
 
-                    while( r == data[j+i].name.charAt(0) ) {
+                    var j = i;
+                    while( j != data.length -1 && r == data[j].name.charAt(0) ) {
                         j++;
                     }
+                    j = j - i;
 
                     if( j < 15 )
                         c = ts.clone();
+                    else if( j >= 15 && j <= 25 )
+                        c = tm.clone();
                     else
                         c = tl.clone();
 
@@ -76,8 +81,10 @@ function victus() {
                 a.attr("onclick", "v.disp_recipe(" + i + ")");
                 li.append(a);
 
-                if( j >= 15 )
+                if( j >= 15 && j < 25 )
                     li.addClass("col-sm-12 col-sm-12 col-md-6 col-lg-6");
+                else if( j >= 25 )
+                    li.addClass("col-sm-12 col-sm-6 col-md-4 col-lg-4");
 
                 c.find('.list-unstyled').append(li);
 
