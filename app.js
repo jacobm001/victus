@@ -1,5 +1,16 @@
 function victus() {
     this.recipes;
+    this.recipe_index;
+    this.recipe_display;
+    this.recipe_create;
+
+    this.init = function() {
+        self.recipe_index   = $('<div class="row" id="recipe_index">');
+        self.recipe_display = $('<div class="row" id="recipe_display">');
+        self.recipe_create  = $('<div class="row" id="recipe_create">');
+        this.get_partials();
+        this.get_recipes();
+    };
 
     this.set_active_menu = function(option) {
         var str = "#menu_" + option;
@@ -8,19 +19,21 @@ function victus() {
     };
 
     this.set_active_view = function(option) {
-        $(".view-visible").toggleClass("view-visible");
-        $("#" + option).toggleClass("view-visible");
+        $("#content > .row").detach();
+        if( option === "recipe_index" )
+            $("#content").append(self.recipe_index);
+        else if( option === "recipe_create" )
+            $("#content").append(self.recipe_create);
     };
 
     this.disp_recipe = function(id) {
-        var list    = $("#list");
-        var display = $("#disp_recipe");
-        var ingr    = display.find("#disp_recipe_ingredients");
+        recipe_index.detach();
 
-        display.find("#disp_recipe_name").text(recipes[id].name);
-        display.find("#disp_recipe_directions").text(recipes[id].directions);
-        display.find("#disp_recipe_yields").text(recipes[id].yields);
+        recipe_display.find("#disp_recipe_name").text(recipes[id].name);
+        recipe_display.find("#disp_recipe_directions").text(recipes[id].directions);
+        recipe_display.find("#disp_recipe_yields").text(recipes[id].yields);
 
+        var ingr = recipe_display.find("#disp_recipe_ingredients");
         ingr.empty("");
         for(var i = 0; i < recipes[id].ingredients.length; ++i) {
             var str = "<li class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\">";
@@ -29,19 +42,28 @@ function victus() {
             ingr.append(str);
         }
 
-        $(".view-visible").toggleClass("view-visible");
-        display.toggleClass("view-visible");
-
+        $("#content").append(recipe_display);
     };
 
     this.disp_create = function() {
-        this.set_active_view("create");
         this.set_active_menu("create");
+        this.set_active_view("recipe_create");
     };
 
     this.disp_list = function() {
-        this.set_active_view("list");
         this.set_active_menu("home");
+        this.set_active_view("recipe_index");
+    };
+
+    this.get_partials = function() {
+        $.get("partials/display.html", function(data)
+        {
+            self.recipe_display.append(data);
+        });
+
+        $.get("partials/create.html", function(data) {
+            self.recipe_create.append(data);
+        })
     };
 
     this.get_recipes = function() {
@@ -90,12 +112,14 @@ function victus() {
 
                 if( i == data.length-1 || data[i+1].name.charAt(0) != r ) {
                     c.removeClass("hidden");
-                    $("#content").append(c);
+                    recipe_index.append(c);
                 }
             }
+
+            $("#content").append(recipe_index);
         });
     };
 }
 
 var v = new victus();
-v.get_recipes();
+v.init();
