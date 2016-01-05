@@ -14,8 +14,14 @@ function victus() {
 
     this.set_active_menu = function(option) {
         var str = "#menu_" + option;
+        var menu_recipe = $("#menu_recipe");
         $(".nav .active").toggleClass("active");
         $(str).toggleClass("active");
+
+        if( option == "recipe" && menu_recipe.hasClass("hidden") )
+            menu_recipe.removeClass("hidden");
+        else if( option != "recipe" && !menu_recipe.hasClass("hidden") )
+            menu_recipe.addClass("hidden");
     };
 
     this.set_active_view = function(option) {
@@ -28,6 +34,7 @@ function victus() {
 
     this.disp_recipe = function(id) {
         recipe_index.detach();
+        this.set_active_menu("recipe");
 
         recipe_display.find("#disp_recipe_name").text(recipes[id].name);
         recipe_display.find("#disp_recipe_directions").text(recipes[id].directions);
