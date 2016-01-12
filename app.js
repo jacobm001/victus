@@ -1,3 +1,33 @@
+function creator() {
+	this.name;
+	this.yield;
+	this.notes;
+	this.ingredients = [];
+	this.directions;
+	this.tags = [];
+
+	this.get_values = function() {
+		this.name       = $("#recipe_create_name").text();
+		this.yield      = $("#recipe_create_yield").text();
+		this.notes      = $("#recipe_create_notes").text();
+		this.directions = $("#recipe_create_directions").text();
+	};
+
+	this.submit() = function() {
+		// setup post service here
+	};
+
+	// ingredients do not need to be unique
+	this.add_ingredient() = function() {
+	
+	};
+
+	// tags should be unique
+	this.add_tag() = function() {
+
+	};
+};
+
 function victus() {
     this.recipes;
     this.recipe_index;
