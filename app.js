@@ -55,7 +55,8 @@ function victus() {
     };
 
     this.set_active_view = function(option) {
-        $("#content > .row").detach();
+        window.scrollTo(0,0);
+		$("#content > .row").detach();
         if( option === "recipe_index" )
             $("#content").append(self.recipe_index);
         else if( option === "recipe_create" )
@@ -64,6 +65,8 @@ function victus() {
 
     this.disp_recipe = function(id) {
         recipe_index.detach();
+		window.scrollTo(0,0);
+
         this.set_active_menu("recipe");
 
         recipe_display.find("#disp_recipe_name").text(recipes[id].name);
