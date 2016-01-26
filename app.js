@@ -11,7 +11,7 @@ function editor() {
 	this.cleaned_values;
 
 	this.get_values = function() {
-		this.name	   = $("#create_recipe_id").val();
+		this.name	   = $("#create_recipe_name").val();
 		this.yeilds	 = $("#create_recipe_yields").val();
 		this.notes	  = $("#create_recipe_notes").val();
 		this.directions = $("#create_recipe_directions").val();
