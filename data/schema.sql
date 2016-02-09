@@ -55,6 +55,9 @@ CREATE TABLE recipe_ingredients (
 );
 CREATE INDEX recipe_tags_find_id on recipe_tags(recipe_id);
 CREATE INDEX recipe_ingredients_find_id on recipe_ingredients(recipe_id);
+CREATE INDEX find_banned_ip4 on banned_ip(ban_ip4);
+CREATE INDEX find_banned_ip6 on banned_ip(ban_ip6);
+CREATE INDEX find_session_key on sessions(session_key);
 CREATE VIEW one_line_recipes as
 select
 	recipes.recipe_id,
