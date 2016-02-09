@@ -3,4 +3,4 @@ scratch/*
 .idea/*
 *.swp
 *.swo
-
+*.sublime-workspace
