@@ -5,10 +5,18 @@ CREATE TABLE users (
 	name text,
 	primary key(user_id)
 );
+CREATE TABLE banned_ip (
+	ban_id number,
+	ban_ip4 text,
+	ban_ip6 text,
+	ban_date date,
+	ban_reason text,
+	primary key(ban_id)
+);
 CREATE TABLE sessions (
 	session_id number,
-	session_key text,
 	session_user number,
+	session_key text,
 	session_start date,
 	session_expires date,
 	primary key(session_id),
