@@ -5,6 +5,15 @@ CREATE TABLE users (
 	name text,
 	primary key(user_id)
 );
+CREATE TABLE sessions (
+	session_id number,
+	session_key text,
+	session_user number,
+	session_start date,
+	session_expires date,
+	primary key(session_id),
+	foreign key(session_user) references users(user_id)
+);
 CREATE TABLE recipes(
 	recipe_id integer primary key autoincrement,
 	user_id number,
