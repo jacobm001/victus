@@ -6,7 +6,7 @@ CREATE TABLE users (
 	primary key(user_id)
 );
 CREATE TABLE banned_ip (
-	ban_id number,
+	ban_id integer primary key autoincrement,
 	ban_ip4 text,
 	ban_ip6 text,
 	ban_date date,
@@ -14,7 +14,7 @@ CREATE TABLE banned_ip (
 	primary key(ban_id)
 );
 CREATE TABLE sessions (
-	session_id number,
+	session_id integer primary key autoincrement,
 	session_user number,
 	session_key text,
 	session_start date,
@@ -23,7 +23,7 @@ CREATE TABLE sessions (
 	foreign key(session_user) references users(user_id)
 );
 CREATE TABLE auth_log (
-	auth_id number,
+	auth_id integer primary key autoincrement,
 	user_id number,
 	attempt_date date,
 	attempt_ip4 text,
