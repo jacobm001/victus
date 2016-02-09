@@ -22,6 +22,16 @@ CREATE TABLE sessions (
 	primary key(session_id),
 	foreign key(session_user) references users(user_id)
 );
+CREATE TABLE auth_log (
+	auth_id number,
+	user_id number,
+	attempt_date date,
+	attempt_ip4 text,
+	attempt_ip6 text,
+	status text,
+	primary key(auth_id),
+	foreign key(user_id) references users(user_id)
+);
 CREATE TABLE recipes(
 	recipe_id integer primary key autoincrement,
 	user_id number,
