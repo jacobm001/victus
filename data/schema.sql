@@ -10,8 +10,7 @@ CREATE TABLE banned_ip (
 	ban_ip4 text,
 	ban_ip6 text,
 	ban_date date,
-	ban_reason text,
-	primary key(ban_id)
+	ban_reason text
 );
 CREATE TABLE sessions (
 	session_id integer primary key autoincrement,
@@ -19,7 +18,6 @@ CREATE TABLE sessions (
 	session_key text,
 	session_start date,
 	session_expires date,
-	primary key(session_id),
 	foreign key(session_user) references users(user_id)
 );
 CREATE TABLE auth_log (
@@ -29,7 +27,6 @@ CREATE TABLE auth_log (
 	attempt_ip4 text,
 	attempt_ip6 text,
 	status text,
-	primary key(auth_id),
 	foreign key(user_id) references users(user_id)
 );
 CREATE TABLE recipes(
