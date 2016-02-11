@@ -79,8 +79,6 @@ function victus() {
 	};
 
 	this.disp_recipe = function(id) {
-		ga('send', 'pageview');
-		
 		recipe_index.detach();
 		this.set_active_menu("recipe");
 
@@ -118,7 +116,7 @@ function victus() {
 
 		$.get("partials/create.html", function(data) {
 			self.recipe_create.append(data);
-		})
+		});
 	};
 
 	this.get_recipes = function() {
