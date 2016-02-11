@@ -11,9 +11,9 @@ function editor() {
 	this.cleaned_values;
 
 	this.get_values = function() {
-		this.name	   = $("#create_recipe_name").val();
-		this.yeilds	 = $("#create_recipe_yields").val();
-		this.notes	  = $("#create_recipe_notes").val();
+		this.name       = $("#create_recipe_name").val();
+		this.yeilds     = $("#create_recipe_yields").val();
+		this.notes      = $("#create_recipe_notes").val();
 		this.directions = $("#create_recipe_directions").val();
 	};
 
@@ -28,12 +28,12 @@ function editor() {
 			clean_ingredients.push(encodeURIComponent(this.ingredients[i]));
 
 		this.cleaned_values = {
-			'name':		encodeURIComponent(this.name),
-			'yields':	  encodeURIComponent(this.yields),
-			'notes':	   encodeURIComponent(this.notes),
-			'ingredients': clean_ingredients,
+			'name':        encodeURIComponent(this.name),
+			'yields':      encodeURIComponent(this.yields),
+			'notes':       encodeURIComponent(this.notes),
 			'directions':  encodeURIComponent(this.directions),
-			'tags':		clean_tags
+			'ingredients': clean_ingredients,
+			'tags':        clean_tags
 		};
 
 		this.cleaned_values = JSON.stringify(this.cleaned_values);
