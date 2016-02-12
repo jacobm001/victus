@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 CREATE TABLE users (
-	user_id number,
+	user_id integer,
 	username text,
 	name text,
 	primary key(user_id)
@@ -12,17 +12,36 @@ CREATE TABLE banned_ip (
 	ban_date date,
 	ban_reason text
 );
+CREATE TABLE priviledges (
+	priviledge_id integer primary key autoincrement,
+	priviledge text,
+	priviledge_desc text
+);
+CREATE TABLE user_priviledges (
+	user_priviledge_id integer primary key autoincrement,
+	user_id integer,
+	grant_date date
+	priviledge text,
+	foreign key(priviledge) references priviledges(priviledge)
+);
 CREATE TABLE sessions (
 	session_id integer primary key autoincrement,
-	session_user number,
+	user_id integer,
 	session_key text,
 	session_start date,
 	session_expires date,
 	foreign key(session_user) references users(user_id)
 );
+CREATE TABLE view_log (
+	view_id integer primary key autoincrement,
+	view_date date,
+	view_ip4 text,
+	view_ip6 text,
+	resource text
+);
 CREATE TABLE auth_log (
 	auth_id integer primary key autoincrement,
-	user_id number,
+	user_id integer,
 	attempt_date date,
 	attempt_ip4 text,
 	attempt_ip6 text,
@@ -31,7 +50,7 @@ CREATE TABLE auth_log (
 );
 CREATE TABLE recipes(
 	recipe_id integer primary key autoincrement,
-	user_id number,
+	user_id integer,
 	recipe_name text,
 	recipe_notes text,
 	recipe_yields text,
