@@ -27,7 +27,7 @@
 
 		private function set_defaults()
 		{
-
+			$this->userlevel = 'guest';
 		}
 
 		private function continue_session()
