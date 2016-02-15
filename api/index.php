@@ -4,7 +4,7 @@
 	//error_reporting(E_ALL); 
 
 	include 'start.php';
-	include 'recipe.php';	
+	include 'recipe.php';
 	
 	$query = "select * from one_line_recipes";
 	$result = $db->query($query);
