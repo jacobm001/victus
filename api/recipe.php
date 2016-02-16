@@ -37,7 +37,7 @@
 		public function set_ingr($ingr_str)
 		{
 			if( $ingr_str != "" )
-				$this->ingredients = array_unique(explode('||', $ingr_str));
+				$this->ingredients = explode('||', $ingr_str);
 		}
 
 		public function add_ingr($ingr)
