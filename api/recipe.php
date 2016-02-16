@@ -29,9 +29,7 @@
 		public function add_tag($tag)
 		{
 			if(!in_array($tag, $this->tags) and $tag != null) 
-			{
 				$this->tags[] = $tag;
-			}
 		}
 
 		public function set_ingr($ingr_str)
