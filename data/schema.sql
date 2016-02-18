@@ -35,7 +35,9 @@ CREATE TABLE view_log (
 	view_id integer primary key autoincrement,
 	view_date date,
 	view_ip text,
-	resource text
+	view_resource text,
+	view_session_key text,
+	foreign key(view_session_key) references sessions(session_key)
 );
 CREATE TABLE auth_log (
 	auth_id integer primary key autoincrement,
