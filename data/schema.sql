@@ -7,7 +7,7 @@ CREATE TABLE users (
 );
 CREATE TABLE banned_ip (
 	ban_id integer primary key autoincrement,
-	ban_ip
+	ban_ip text,
 	ban_date date,
 	ban_reason text
 );
