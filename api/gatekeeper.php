@@ -14,7 +14,7 @@
 
 		private function check_ban_record()
 		{
-			$query_text = 'select ban_reason from banned_ip where ban_ip = ?';
+			$query_text = 'select ban_reason from banned_ip where ban_ip = ? and ban_active_ind = "Y"';
 			$stmt = $this->db->prepare($query_text);
 			$stmt->execute(array($this->ip));
 
