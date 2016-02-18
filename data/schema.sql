@@ -7,8 +7,7 @@ CREATE TABLE users (
 );
 CREATE TABLE banned_ip (
 	ban_id integer primary key autoincrement,
-	ban_ip4 text,
-	ban_ip6 text,
+	ban_ip
 	ban_date date,
 	ban_reason text
 );
@@ -35,16 +34,14 @@ CREATE TABLE sessions (
 CREATE TABLE view_log (
 	view_id integer primary key autoincrement,
 	view_date date,
-	view_ip4 text,
-	view_ip6 text,
+	view_ip text,
 	resource text
 );
 CREATE TABLE auth_log (
 	auth_id integer primary key autoincrement,
 	user_id integer,
 	attempt_date date,
-	attempt_ip4 text,
-	attempt_ip6 text,
+	attempt_ip text,
 	status text,
 	foreign key(user_id) references users(user_id)
 );
@@ -71,8 +68,7 @@ CREATE TABLE recipe_ingredients (
 );
 CREATE INDEX recipe_tags_find_id on recipe_tags(recipe_id);
 CREATE INDEX recipe_ingredients_find_id on recipe_ingredients(recipe_id);
-CREATE INDEX find_banned_ip4 on banned_ip(ban_ip4);
-CREATE INDEX find_banned_ip6 on banned_ip(ban_ip6);
+CREATE INDEX find_banned_ip4 on banned_ip(ban_ip);
 CREATE INDEX find_session_key on sessions(session_key);
 CREATE VIEW one_line_recipes as
 select
