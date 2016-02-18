@@ -9,7 +9,8 @@ CREATE TABLE banned_ip (
 	ban_id integer primary key autoincrement,
 	ban_ip text,
 	ban_date date,
-	ban_reason text
+	ban_reason text,
+	ban_active_ind text
 );
 CREATE TABLE priviledges (
 	priviledge_id integer primary key autoincrement,
