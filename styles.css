@@ -1,7 +1,7 @@
 body {
-    padding-top: 50px;
+	padding-top: 50px;
 	color: #f0e7d5;
-    background-color: #252525;
+	background-color: #252525;
 }
 
 a {
@@ -14,21 +14,21 @@ a:hover {
 }
 
 #create {
-    text-align: left;
+	text-align: left;
 }
 
 .list-alpha {
-    text-align: left;
+	text-align: left;
 }
 
 .section-header {
-    width: 100%;
-    text-align: left;
-    border-bottom: solid;
-    /*
+	width: 100%;
+	text-align: left;
+	border-bottom: solid;
+	/*
 	border-color: darkslategray;
-    color: darkslategray;
-    */
+	color: darkslategray;
+	*/
 	color: #f0e7d5;
 	border-bottom-width: 2px;
 }
@@ -38,24 +38,24 @@ a:hover {
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 .recipe_card {
-    /*border-left-color: blue;*/
-    /*border-left-style: inset;*/
-    /*background-color: white;*/
+	/*border-left-color: blue;*/
+	/*border-left-style: inset;*/
+	/*background-color: white;*/
 }
 
 .card_title {
-    text-align: left;
-    text-decoration: underline;
+	text-align: left;
+	text-decoration: underline;
 }
 
 .card_desc {
 }
 
 #disp_recipe {
-    text-align: left;
+	text-align: left;
 }
 
