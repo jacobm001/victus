@@ -8,6 +8,11 @@
 	include 'recipe.php';
 
 	$gk = new Gatekeeper($_SERVER['REMOTE_ADDR'], $db);
+
+	// basic view recording
+	$record_view = "insert into view_log(view_date, view_ip, view_resource) values(CURRENT_TIMESTAMP,?,?)";
+	$stmt = $db->prepare($record_view);
+	$stmt->execute(array($_SERVER['REMOTE_ADDR'], 'ALL_RECIPES'));
 	
 	$query = "select * from one_line_recipes";
 	$result = $db->query($query);
