@@ -45,8 +45,24 @@
 			if($result == FALSE)
 				return FALSE;
 
-			$this->name = $result['name'];
+			$this->name = $result[0]['name'];
 			return TRUE;
+		}
+
+		public function create_user()
+		{
+			$query_text = 'insert into users(username, password) values(?,?);'
+			$stmt = $this->db->prepare($query_text);
+
+			$result = $stmt->execute(array(
+				$this->username,
+				sha1($this->password)
+			));
+
+			if($result == FALSE)
+				return FALSE;
+			else
+				return TRUE;
 		}
 
 		private function set_defaults()
