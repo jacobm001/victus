@@ -32,6 +32,23 @@
 			$this->password = $pass;
 		}
 
+		public function validate_credentials()
+		{
+			$query_text = 'select name from users where username = ? and password = ?;';
+			$stmt = $this->db->prepare($query_text);
+			$stmt->execute(array(
+				$this->username,
+				sha1($this->password)
+			));
+
+			$result = $stmt->fetchAll();
+			if($result == FALSE)
+				return FALSE;
+
+			$this->name = $result['name'];
+			return TRUE;
+		}
+
 		private function set_defaults()
 		{
 			$this->userlevel = 'guest';
