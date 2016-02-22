@@ -2,6 +2,7 @@ BEGIN TRANSACTION;
 CREATE TABLE users (
 	user_id integer,
 	username text,
+	password text,
 	name text,
 	primary key(user_id)
 );
