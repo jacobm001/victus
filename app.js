@@ -42,7 +42,7 @@ function editor() {
 	this.send_recipe = function() {
 		// post the recipe to api
 	};
-}
+};
 
 function victus() {
 	this.recipes;
@@ -172,7 +172,7 @@ function victus() {
 			$("#content").append(recipe_index);
 		});
 	};
-}
+};
 
 var v = new victus();
 v.init();
