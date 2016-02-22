@@ -4,6 +4,7 @@
 		// user information
 		private $id;
 		private $username;
+		private $password;
 		private $name;
 		private $userlevel;
 		
@@ -23,6 +24,12 @@
 				$this->set_defaults();
 			else
 				$this->continue_session();
+		}
+
+		public function set_credentials($user, $pass)
+		{
+			$this->username = $user;
+			$this->password = $pass;
 		}
 
 		private function set_defaults()
