@@ -5,6 +5,7 @@
 
 	include 'start.php';
 	include 'gatekeeper.php';
+	include 'user.php';
 	include 'recipe.php';
 
 	$gk = new Gatekeeper($_SERVER['REMOTE_ADDR'], $db);
