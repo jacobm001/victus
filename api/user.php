@@ -23,7 +23,7 @@
 			if( $session_key == NULL )
 				$this->set_defaults();
 			else
-				$this->continue_session();
+				$this->validate_session();
 		}
 
 		public function set_credentials($user, $pass)
@@ -70,9 +70,15 @@
 			$this->userlevel = 'guest';
 		}
 
-		private function continue_session()
+		private function validate_session()
 		{
+			$query_text = 'select 1 from sessions where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
+			$stmt = $this->db->prepare($query_text);
 
+			$stmt->execute(array($this->session_key));
+
+			if($result == FALSE)
+				// handle expired session
 		}
 	}
 ?>
