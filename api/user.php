@@ -51,7 +51,7 @@
 
 		public function create_user()
 		{
-			$query_text = 'insert into users(username, password) values(?,?);'
+			$query_text = 'insert into users(username, password) values(?,?);';
 			$stmt = $this->db->prepare($query_text);
 
 			$result = $stmt->execute(array(
@@ -78,6 +78,7 @@
 			$stmt->execute(array($this->session_key));
 
 			if($result == FALSE)
+				die('expired session');
 				// handle expired session
 		}
 	}
