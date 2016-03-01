@@ -7,6 +7,7 @@
 	include 'gatekeeper.php';
 	include 'router.php';
 	include 'routes/route_recipes.php';
+	include 'routes/route_auth.php';
 	include 'user.php';
 	include 'recipe.php';
 
