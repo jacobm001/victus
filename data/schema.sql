@@ -21,7 +21,7 @@ CREATE TABLE priviledges (
 CREATE TABLE user_priviledges (
 	user_priviledge_id integer primary key autoincrement,
 	user_id integer,
-	grant_date date
+	grant_date date,
 	priviledge text,
 	foreign key(priviledge) references priviledges(priviledge)
 );
@@ -31,7 +31,7 @@ CREATE TABLE sessions (
 	session_key text,
 	session_start date,
 	session_expires date,
-	foreign key(session_user) references users(user_id)
+	foreign key(user_id) references users(user_id)
 );
 CREATE TABLE view_log (
 	view_id integer primary key autoincrement,
