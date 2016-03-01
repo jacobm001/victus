@@ -10,8 +10,13 @@
 			$this->db  = $db;
 
 			if($_SERVER['REQUEST_METHOD'] == 'GET') {
-				$this->get_recipes();
-				$this->record_view('ALL_RECIPES');
+				if(count($this->uri) == 1) {
+					$this->get_recipes();
+					$this->record_view('ALL_RECIPES');
+				}
+
+				else if(count($this->uri) == 3)
+					$this->get_recipe();
 			}
 		}
 
@@ -34,6 +39,31 @@
 			}
 
 			echo json_encode($recipes);
+		}
+
+		private function get_recipe()
+		{
+			if($this->uri[1] == 'id') {
+				$query = "select * from one_line_recipes where recipe_id = ?";
+				$this->record_view('recipe/id/' . $this->uri[3]);
+			}
+			else if($this->uri[1] == 'name') {
+				$query = "select * from one_line_recipes where recipe_name = ?";
+				$this->record_view('recipe/name/' . $this->uri[3]);
+			}
+			else
+				die("bad `recipe/:something/`");
+
+			$stmt = $this->db->prepare($query);
+			$stmt->execute(array($this->uri[2]));
+
+			$result = $stmt->fetch();
+			if($result != Null) {
+				$recipe = new Recipe($result["recipe_id"], $result["recipe_name"], 
+						$result["recipe_yields"], $result["recipe_notes"], $result["recipe_directions"]);
+
+				echo json_encode($recipe);
+			}
 		}
 
 		private function record_view($obj)
