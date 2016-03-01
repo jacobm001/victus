@@ -70,7 +70,7 @@
 		{
 			$record_view = "insert into view_log(view_date, view_ip, view_resource) values(CURRENT_TIMESTAMP,?,?)";
 			$stmt = $this->db->prepare($record_view);
-			$stmt->execute(array($_SERVER['REMOTE_ADDR'], 'ALL_RECIPES'));
+			$stmt->execute(array($_SERVER['REMOTE_ADDR'], $obj));
 		}
 	}
 ?>
