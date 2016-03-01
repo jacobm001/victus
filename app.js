@@ -120,7 +120,7 @@ function victus() {
 	};
 
 	this.get_recipes = function() {
-		$.getJSON("api/", function(data) {
+		$.getJSON("api/recipes", function(data) {
 			recipes = data;
 			var ts = $("#recipe_section_template_sm");
 			var tm = $("#recipe_section_template_md");
