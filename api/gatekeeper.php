@@ -42,13 +42,16 @@
 
 		private function validate_session()
 		{
-			$query_text = 'select 1 from sessions where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
+			$query_text = 'select user.username from sessions join users on sessions.user_id = users.user_id where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
 			$stmt = $this->db->prepare($query_text);
 
 			$stmt->execute(array($this->session_key));
+			$result = $stmt->fetch();
 
 			if($result == FALSE)
 				die('expired session');
+
+			$this->user = $result['username'];
 		}
 	}
 ?>
