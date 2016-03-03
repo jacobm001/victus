@@ -4,9 +4,9 @@
 		private $uri;
 		private $db;
 
-		public function __construct($uri, &$db)
+		public function __construct(&$db)
 		{
-			$this->uri = explode('/', $uri);
+			$this->uri = explode('/', $_REQUEST['uri']);
 			$this->db  = $db;
 			$this->create_route_obj();
 		}

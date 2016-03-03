@@ -23,6 +23,8 @@
 				$this->login();
 			else if($this->uri[1] == 'logout')
 				$this->logout();
+			else if($this->uri[1] == 'create')
+				$this->create();
 		}
 
 		private function login()
@@ -47,11 +49,27 @@
 			$stmt  = $this->db->prepare($query);
 			$stmt->execute(array($_POST['user'], hash('sha256', $_POST['pass'])));
 
-			$result = $stmt->fetch();
-			if(empty($result))
+			$result = $stmt->fetchAll();
+			if($result == FALSE)
 				die("username/password invalid");
 			else
-				return $result['user_id'];
+				return $result[0]['user_id'];
+		}
+
+		private function create()
+		{
+			// $query_text = 'insert into users(username, password) values(?,?);';
+			// $stmt = $this->db->prepare($query_text);
+
+			// $result = $stmt->execute(array(
+			// 	$this->username,
+			// 	sha1($this->password)
+			// ));
+
+			// if($result == FALSE)
+			// 	return FALSE;
+			// else
+			// 	return TRUE;
 		}
 	}
 ?>

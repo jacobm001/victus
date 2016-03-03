@@ -3,13 +3,20 @@
 	{
 		private $ip;
 		private $db;
+		private $user;
+		private $pass;
+		private $userlevel;
+		private $session_key;
 
-		public function __construct($ip, &$db)
+		public function __construct(&$db)
 		{
-			$this->ip = $ip;
+			$this->ip = $_SERVER['REMOTE_ADDR'];
 			$this->db = $db;
 
 			$this->check_ban_record();
+			if($this->check_for_session()) {
+				$this->validate_session();
+			}
 		}
 
 		private function check_ban_record()
@@ -21,6 +28,27 @@
 			if($stmt->fetchAll(PDO::FETCH_ASSOC) != FALSE) {
 				die('You were banned!');
 			}
+		}
+
+		private function check_for_session()
+		{
+			if(isset($_REQUEST['session'])) {
+				$this->session_key = $_REQUEST['session'];
+				return True;
+			}
+			else
+				return False;
+		}
+
+		private function validate_session()
+		{
+			$query_text = 'select 1 from sessions where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
+			$stmt = $this->db->prepare($query_text);
+
+			$stmt->execute(array($this->session_key));
+
+			if($result == FALSE)
+				die('expired session');
 		}
 	}
 ?>
