@@ -23,6 +23,7 @@
 					break;
 				case 'log':
 					new Route_Log($this->uri, $this->db);
+					break;
 				default:
 					var_dump($this->uri);
 			}
