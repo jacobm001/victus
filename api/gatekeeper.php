@@ -3,6 +3,7 @@
 	{
 		private $ip;
 		private $db;
+		private $id;
 		private $user;
 		private $pass;
 		private $userlevel;
@@ -15,7 +16,7 @@
 
 			$this->check_ban_record();
 			if($this->check_for_session()) {
-				$this->validate_session();
+				$this->validate_session());
 			}
 		}
 
@@ -42,7 +43,7 @@
 
 		private function validate_session()
 		{
-			$query_text = 'select user.username from sessions join users on sessions.user_id = users.user_id where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
+			$query_text = 'select users.user_id, users.username from sessions join users on sessions.user_id = users.user_id where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
 			$stmt = $this->db->prepare($query_text);
 
 			$stmt->execute(array($this->session_key));
@@ -51,7 +52,8 @@
 			if($result == FALSE)
 				die('expired session');
 
-			$this->user = $result['username'];
+			$this->user_id  = $result['user_id'];
+			$this->username = $result['username'];
 		}
 	}
 ?>
