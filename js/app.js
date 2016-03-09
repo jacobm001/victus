@@ -50,6 +50,8 @@ function victus() {
 		}
 
 		$("#content").append(recipe_display);
+
+		$.post('api/log/' + id)
 	};
 
 	this.disp_create = function() {
