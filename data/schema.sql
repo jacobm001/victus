@@ -70,6 +70,12 @@ CREATE TABLE recipe_ingredients (
 	ingredient_name text,
 	foreign key(recipe_id) references recipes(recipe_id)
 );
+CREATE TABLE settings (
+	setting_id integer primary key autoincrement,
+	setting_name text,
+	setting_desc text,
+	setting_value text
+);
 CREATE INDEX recipe_tags_find_id on recipe_tags(recipe_id);
 CREATE INDEX recipe_ingredients_find_id on recipe_ingredients(recipe_id);
 CREATE INDEX find_banned_ip4 on banned_ip(ban_ip);
