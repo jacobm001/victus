@@ -21,6 +21,8 @@
 				case 'auth':
 					new Route_Auth($this->uri, $this->db);
 					break;
+				case 'log':
+					new Route_Log($this->uri, $this->db);
 				default:
 					var_dump($this->uri);
 			}

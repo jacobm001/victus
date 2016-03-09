@@ -8,6 +8,7 @@
 	include 'router.php';
 	include 'routes/route_recipes.php';
 	include 'routes/route_auth.php';
+	include 'routes/route_log.php';
 	include 'recipe.php';
 
 	$gk    = new Gatekeeper($db);
