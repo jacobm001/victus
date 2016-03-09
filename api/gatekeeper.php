@@ -16,7 +16,7 @@
 
 			$this->check_ban_record();
 			if($this->check_for_session()) {
-				$this->validate_session());
+				$this->validate_session();
 			}
 		}
 
