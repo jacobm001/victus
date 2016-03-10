@@ -1,39 +1,39 @@
-BEGIN TRANSACTION;
-CREATE TABLE users (
+begin transaction;
+create table users (
 	user_id integer,
 	username text,
 	password text,
 	name text,
 	primary key(user_id)
 );
-CREATE TABLE banned_ip (
+create table banned_ip (
 	ban_id integer primary key autoincrement,
 	ban_ip text,
 	ban_date date,
 	ban_reason text,
 	ban_active_ind text
 );
-CREATE TABLE priviledges (
+create table priviledges (
 	priviledge_id integer primary key autoincrement,
 	priviledge text,
 	priviledge_desc text
 );
-CREATE TABLE user_priviledges (
+create table user_priviledges (
 	user_priviledge_id integer primary key autoincrement,
 	user_id integer,
 	grant_date date,
 	priviledge text,
 	foreign key(priviledge) references priviledges(priviledge)
 );
-CREATE TABLE sessions (
+create table "sessions" (
 	session_id integer primary key autoincrement,
-	user_id integer,
-	session_key text,
-	session_start date,
-	session_expires date,
-	foreign key(user_id) references users(user_id)
+	session_user number not null,
+	session_key text not null,
+	session_start date not null default current_timestamp,
+	session_expires date not null default (datetime('now', '2 days')),
+	foreign key(`session_user`) references `users`(`user_id`)
 );
-CREATE TABLE view_log (
+create table view_log (
 	view_id integer primary key autoincrement,
 	view_date date,
 	view_ip text,
@@ -41,7 +41,7 @@ CREATE TABLE view_log (
 	view_session_key text,
 	foreign key(view_session_key) references sessions(session_key)
 );
-CREATE TABLE auth_log (
+create table auth_log (
 	auth_id integer primary key autoincrement,
 	user_id integer,
 	attempt_date date,
@@ -49,7 +49,7 @@ CREATE TABLE auth_log (
 	status text,
 	foreign key(user_id) references users(user_id)
 );
-CREATE TABLE recipes(
+create table recipes(
 	recipe_id integer primary key autoincrement,
 	user_id integer,
 	recipe_name text,
@@ -58,29 +58,29 @@ CREATE TABLE recipes(
 	recipe_directions text,
 	foreign key(user_id) references users(user_id)
 );
-CREATE TABLE recipe_tags (
+create table recipe_tags (
 	tag_id integer primary key autoincrement,
 	recipe_id integer,
 	tag_name text,
 	foreign key(recipe_id) references recipes(recipe_id)
 );
-CREATE TABLE recipe_ingredients (
+create table recipe_ingredients (
 	ingredient_id integer primary key autoincrement,
 	recipe_id integer,
 	ingredient_name text,
 	foreign key(recipe_id) references recipes(recipe_id)
 );
-CREATE TABLE settings (
+create table settings (
 	setting_id integer primary key autoincrement,
 	setting_name text,
 	setting_desc text,
 	setting_value text
 );
-CREATE INDEX recipe_tags_find_id on recipe_tags(recipe_id);
-CREATE INDEX recipe_ingredients_find_id on recipe_ingredients(recipe_id);
-CREATE INDEX find_banned_ip4 on banned_ip(ban_ip);
-CREATE INDEX find_session_key on sessions(session_key);
-CREATE VIEW one_line_recipes as
+create index recipe_tags_find_id on recipe_tags(recipe_id);
+create index recipe_ingredients_find_id on recipe_ingredients(recipe_id);
+create index find_banned_ip4 on banned_ip(ban_ip);
+create index find_session_key on sessions(session_key);
+create view one_line_recipes as
 select
 	recipes.recipe_id,
 	recipes.recipe_name,
@@ -113,4 +113,4 @@ group by
 	recipes.recipe_id
 order by
 	recipes.recipe_name;
-COMMIT;
+commit;
