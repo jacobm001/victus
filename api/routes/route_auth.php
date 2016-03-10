@@ -31,6 +31,7 @@
 		{
 			$this->check_post_vars();
 			$user_id = $this->check_credentials();
+			$this->create_session();
 		}
 
 		private function logout()
@@ -54,6 +55,11 @@
 				die("username/password invalid");
 			else
 				return $result[0]['user_id'];
+		}
+
+		private function create_session()
+		{
+			
 		}
 
 		private function create()
