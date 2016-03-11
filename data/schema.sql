@@ -25,7 +25,7 @@ create table user_priviledges (
 	priviledge text,
 	foreign key(priviledge) references priviledges(priviledge)
 );
-create table "sessions" (
+create table sessions (
 	session_id integer primary key autoincrement,
 	session_user number not null,
 	session_key text not null,

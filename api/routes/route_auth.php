@@ -31,7 +31,7 @@
 		{
 			$this->check_post_vars();
 			$user_id = $this->check_credentials();
-			$this->create_session();
+			$this->create_session($user_id);
 		}
 
 		private function logout()
@@ -57,9 +57,17 @@
 				return $result[0]['user_id'];
 		}
 
-		private function create_session()
+		private function create_session($user_id)
 		{
+			$query = "insert into sessions(user_id, session_key) values(?,?)";
+			$time  = strtotime("now");
+			$key   = md5( $user_id . $time );
 			
+			$stmt  = $this->db->prepare($query);
+			$stmt->execute(array(
+				$user_id,
+				$key
+			));
 		}
 
 		private function create()
