@@ -7,6 +7,7 @@
 	],
 	"settings":
 	{
-		"default_line_ending": "unix"
+		"default_line_ending": "unix",
+		"word_wrap":false
 	}
 }
