@@ -69,4 +69,13 @@
 
 	<script src="js/editor.js"></script>
 	<script src="js/app.js"></script>
+
+	<script>
+	$.post('api/auth/login', {'user':'jacob', 'pass':'2959'}, function(data) {
+		console.log('login:', data);
+		$.post('api/auth/validate', {'key':data}, function(d) {
+			console.log('validated:', d)
+		});
+	});
+	</script>
 </html>

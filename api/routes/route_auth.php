@@ -25,23 +25,41 @@
 				$this->logout();
 			else if($this->uri[1] == 'create')
 				$this->create();
+			else if($this->uri[1] == 'validate')
+				$this->validate();
 		}
 
 		private function login()
 		{
-			$this->check_post_vars();
+			$this->check_post_vars('login');
 			$user_id = $this->check_credentials();
 			$this->create_session($user_id);
+		}
+
+		private function validate()
+		{
+			$this->check_post_vars('validate');
+			$this->check_key();
 		}
 
 		private function logout()
 		{
 		}
 
-		private function check_post_vars()
+		private function check_post_vars($type)
 		{
-			if(!isset($_POST['user']) or !isset($_POST['pass']))
-				die("Missing a credential");
+			if($type == 'login') {
+				if(!isset($_POST['user']) or !isset($_POST['pass']))
+					die("Missing a credentials");
+
+				$this->user = new User();
+				$this->user->set_username($_POST['user'])
+				$this->user->set_password($_POST['pass']);
+			}
+			else if($type == 'validate') {
+				if(!isset($_POST['key']))
+					die("Missing key");
+			}
 		}
 
 		private function check_credentials()
@@ -57,9 +75,22 @@
 				return $result[0]['user_id'];
 		}
 
+		private function check_key()
+		{
+			$query = "select session_expires from sessions where session_key = ? and current_timestamp between session_start and session_expires";
+			$stmt = $this->db->prepare($query);
+			$stmt->execute(array($_POST['key']));
+
+			$result = $stmt->fetchAll();
+			if($result == FALSE)
+				die("key is no good");
+			else
+				echo $result[0]['session_expires'];
+		}
+
 		private function create_session($user_id)
 		{
-			$query = "insert into sessions(user_id, session_key) values(?,?)";
+			$query = "insert into sessions(session_user, session_key) values(?,?)";
 			$time  = strtotime("now");
 			$key   = md5( $user_id . $time );
 			
@@ -68,6 +99,8 @@
 				$user_id,
 				$key
 			));
+
+			echo $key;
 		}
 
 		private function create()
