@@ -3,13 +3,26 @@ function victus() {
 	this.recipe_index;
 	this.recipe_display;
 	this.recipe_create;
+	this.user = new auth();
 
 	this.init = function() {
 		self.recipe_index   = $('<div class="row" id="recipe_index">');
 		self.recipe_display = $('<div class="row" id="recipe_display">');
 		self.recipe_create  = $('<div class="row" id="recipe_create">');
+		self.recipe_login   = $('<div class="row" id="recipe_login">');
+		
 		this.get_partials();
-		this.get_recipes();
+		// this.get_recipes();
+
+		this.user.init();
+
+		if(this.user.is_authenticated === true) {
+			this.get_recipes();
+			this.set_active_view("recipe_index");
+		} 
+		else {
+			this.set_active_view("recipe_login");
+		}
 	};
 
 	this.set_active_menu = function(option) {
@@ -28,8 +41,12 @@ function victus() {
 		$("#content > .row").detach();
 		if( option === "recipe_index" )
 			$("#content").append(self.recipe_index);
+		
 		else if( option === "recipe_create" )
 			$("#content").append(self.recipe_create);
+		
+		else if( option === "recipe_login" )
+			$("#content").append(self.recipe_login);
 	};
 
 	this.disp_recipe = function(id) {
@@ -72,6 +89,10 @@ function victus() {
 
 		$.get("partials/create.html", function(data) {
 			self.recipe_create.append(data);
+		});
+
+		$.get("partials/login.html", function(data) {
+			self.recipe_login.append(data);
 		});
 	};
 
@@ -132,5 +153,3 @@ function victus() {
 
 var v = new victus();
 v.init();
-
-var e = new editor();

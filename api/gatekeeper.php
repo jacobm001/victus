@@ -45,10 +45,10 @@
 				$this->session_key = $_REQUEST['session'];
 			
 			if(isset($_REQUEST['user']))
-				$this->user = _REQUEST['user'];
+				$this->user = $_REQUEST['user'];
 			
 			if(isset($_REQUEST['pass']))
-				$this->pass = _REQUEST['pass'];
+				$this->pass = $_REQUEST['pass'];
 		}
 
 		private function validate_session()

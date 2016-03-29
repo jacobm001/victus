@@ -42,19 +42,11 @@
 			$this->check_key();
 		}
 
-		private function logout()
-		{
-		}
-
 		private function check_post_vars($type)
 		{
 			if($type == 'login') {
 				if(!isset($_POST['user']) or !isset($_POST['pass']))
 					die("Missing a credentials");
-
-				$this->user = new User();
-				$this->user->set_username($_POST['user'])
-				$this->user->set_password($_POST['pass']);
 			}
 			else if($type == 'validate') {
 				if(!isset($_POST['key']))
