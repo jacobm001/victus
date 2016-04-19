@@ -33,11 +33,11 @@ function auth() {
 		this.is_authenticated = val;
 	}
 
-	this.submit_credentials = function() {
+	this.submit_credentials = function(v) {
 		var user = $("#inputUsername").val();
 		var pass = $("#inputPassword").val();
 		var self = this;
-
+		
 		$.post('api/auth/login', {'user':user, 'pass':pass}, function(data) {
 			data = JSON.parse(data);
 			if(data.status == 'success') {
@@ -46,7 +46,9 @@ function auth() {
 				self.key         = data.session_key;
 				self.key_expires = data.session_exp;
 				self.update_is_auth(true);
-				console.log("values updated");
+				
+				v.get_recipes();
+				v.set_active_view("recipe_index");
 			}
 		});
 	};

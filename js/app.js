@@ -26,17 +26,7 @@ function victus() {
 	};
 
 	this.login = function() {
-		this.user.submit_credentials();
-
-		console.log("checking new auth status");
-		if( this.user.is_authenticated === true ) {
-			console.log("login success");
-			this.get_recipes();
-			this.set_active_view("recipe_index");
-		}
-		else {
-			// handle failed auth attempt here
-		}
+		this.user.submit_credentials(this);
 	}
 
 	this.set_active_menu = function(option) {
