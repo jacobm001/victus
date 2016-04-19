@@ -38,7 +38,7 @@ function auth() {
 		var pass = $("#inputPassword").val();
 		var self = this;
 
-		$.get('api/auth/login', {'user':user, 'pass':pass}, function(data) {
+		$.post('api/auth/login', {'user':user, 'pass':pass}, function(data) {
 			data = JSON.parse(data);
 			if(data.status == 'success') {
 				localStorage.setItem('key', data.session_key);
