@@ -13,27 +13,41 @@ function auth() {
 		this.key         = localStorage.getItem('key');
 		this.key_expires = localStorage.getItem('key_expires');
 		
-		if(this.key !== null && this.key_expires !== null)
+		if(this.key != null && this.key_expires != null)
 			return true;
-		else
-			return false;
+		
+		console.log("storage not found");
+		return false;
 	};
 
 	this.validate_local_credentials = function() {
-		if(this.key_expires < new Date())
+		if(new Date() < new Date(this.key_expires))
 			return true;
-		else
-			return false;
+		
+		console.log("credentials suck");
+		return false;
 	};
+
+	this.update_is_auth = function(val)
+	{
+		this.is_authenticated = val;
+	}
 
 	this.submit_credentials = function() {
 		var user = $("#inputUsername").val();
 		var pass = $("#inputPassword").val();
-		
-		console.log("submitting credentials:", user, pass);
-		
-		$.post('api/auth/login', {'user':user, 'pass':pass}, function(data) {
-			console.log(data);
+		var self = this;
+
+		$.get('api/auth/login', {'user':user, 'pass':pass}, function(data) {
+			data = JSON.parse(data);
+			if(data.status == 'success') {
+				localStorage.setItem('key', data.session_key);
+				localStorage.setItem('key_expires', data.session_exp);
+				self.key         = data.session_key;
+				self.key_expires = data.session_exp;
+				self.update_is_auth(true);
+				console.log("values updated");
+			}
 		});
 	};
 };

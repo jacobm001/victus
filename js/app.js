@@ -25,6 +25,20 @@ function victus() {
 		}
 	};
 
+	this.login = function() {
+		this.user.submit_credentials();
+
+		console.log("checking new auth status");
+		if( this.user.is_authenticated === true ) {
+			console.log("login success");
+			this.get_recipes();
+			this.set_active_view("recipe_index");
+		}
+		else {
+			// handle failed auth attempt here
+		}
+	}
+
 	this.set_active_menu = function(option) {
 		var str = "#menu_" + option;
 		var menu_recipe = $("#menu_recipe");

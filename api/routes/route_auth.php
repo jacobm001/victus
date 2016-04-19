@@ -32,8 +32,14 @@
 		private function login()
 		{
 			$this->check_post_vars('login');
-			$user_id = $this->check_credentials();
-			$this->create_session($user_id);
+			$user_id     = $this->check_credentials();
+			$session_key = $this->create_session($user_id);
+			$session_exp = $this->get_session_exp($session_key);
+
+			$ret['status']      = 'success';
+			$ret['session_key'] = $session_key;
+			$ret['session_exp'] = $session_exp;
+			echo json_encode($ret);
 		}
 
 		private function validate()
@@ -92,7 +98,18 @@
 				$key
 			));
 
-			echo $key;
+			return $key;
+		}
+
+		private function get_session_exp($session_key)
+		{
+			$query = "select session_expires from sessions where session_key = :session_key";
+			$stmt  = $this->db->prepare($query);
+			$stmt->bindParam(':session_key', $session_key);
+			$stmt->execute();
+
+			$result = $stmt->fetch();
+			return $result[0];
 		}
 
 		private function create()

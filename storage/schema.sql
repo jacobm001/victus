@@ -1,4 +1,3 @@
-begin transaction;
 create table users (
 	user_id integer,
 	username text,
@@ -76,10 +75,13 @@ create table settings (
 	setting_desc text,
 	setting_value text
 );
+
+create index user_auth on users(username, password)
 create index recipe_tags_find_id on recipe_tags(recipe_id);
 create index recipe_ingredients_find_id on recipe_ingredients(recipe_id);
-create index find_banned_ip4 on banned_ip(ban_ip);
+create index find_banned_ip on banned_ip(ban_ip);
 create index find_session_key on sessions(session_key);
+
 create view one_line_recipes as
 select
 	recipes.recipe_id,
