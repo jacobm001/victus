@@ -39,6 +39,7 @@ function auth() {
 		var self = this;
 		
 		$.post('api/auth/login', {'user':user, 'pass':pass}, function(data) {
+			console.log(data);
 			data = JSON.parse(data);
 			if(data.status == 'success') {
 				localStorage.setItem('key', data.session_key);

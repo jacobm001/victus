@@ -72,7 +72,9 @@ function victus() {
 
 		$("#content").append(recipe_display);
 
-		$.post('api/log/' + id)
+		var post_url = 'api/log/' + id;
+		var data = { 'session_key': this.user.key };
+		$.post(post_url, data)
 	};
 
 	this.disp_create = function() {
@@ -101,7 +103,9 @@ function victus() {
 	};
 
 	this.get_recipes = function() {
-		$.getJSON("api/recipes", function(data) {
+		var data = { 'session_key': this.user.key };
+
+		$.getJSON("api/recipes", data, function(data) {
 			recipes = data;
 			var ts = $("#recipe_section_template_sm");
 			var tm = $("#recipe_section_template_md");

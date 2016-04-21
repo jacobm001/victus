@@ -12,5 +12,5 @@
 	include 'recipe.php';
 
 	$gk    = new Gatekeeper($db);
-	$route = new Router($db);
+	//$route = new Router($db);
 ?>
