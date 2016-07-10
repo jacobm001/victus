@@ -49,7 +49,7 @@
 
 		private function validate_session()
 		{
-			$query_text = 'select users.user_id, users.username, sessions.session_expires from sessions join users on sessions.user_id = users.user_id where session_key = ? and CURRRENT_TIMESTAMP between session_start and session_expires;';
+			$query_text = 'select users.user_id, users.username, sessions.session_expires from sessions join users on sessions.session_user = users.user_id where session_key = ? and current_timestamp between session_start and session_expires;';
 			$stmt = $this->db->prepare($query_text);
 
 			$stmt->execute(array($this->session_key));
