@@ -11,6 +11,5 @@
 	include 'routes/route_log.php';
 	include 'recipe.php';
 
-	$gk    = new Gatekeeper($db);
-	//$route = new Router($db);
+	$gk = new Gatekeeper($db);
 ?>
