@@ -5,7 +5,6 @@
 
 	include 'start.php';
 	include 'gatekeeper.php';
-	include 'router.php';
 	include 'routes/route_recipes.php';
 	include 'routes/route_auth.php';
 	include 'routes/route_log.php';
