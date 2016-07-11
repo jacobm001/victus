@@ -4,6 +4,7 @@ function victus() {
 	this.recipe_display;
 	this.recipe_create;
 	this.user = new auth();
+	this.editor = new editor();
 
 	this.init = function() {
 		self.recipe_index   = $('<div class="row" id="recipe_index">');
@@ -15,6 +16,7 @@ function victus() {
 		// this.get_recipes();
 
 		this.user.init();
+		this.editor.init();
 
 		if(this.user.is_authenticated === true) {
 			this.get_recipes();
@@ -64,7 +66,7 @@ function victus() {
 		var ingr = recipe_display.find("#disp_recipe_ingredients");
 		ingr.empty("");
 		for(var i = 0; i < recipes[id].ingredients.length; ++i) {
-			var str = "<li class=\"col-xs-12 col-sm-6 col-md-4 col-lg-3\">";
+			var str = "<li>";
 			str += recipes[id].ingredients[i];
 			str += "</li>";
 			ingr.append(str);
@@ -161,3 +163,4 @@ function victus() {
 
 var v = new victus();
 v.init();
+console.log(v);
