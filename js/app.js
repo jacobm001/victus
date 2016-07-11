@@ -59,8 +59,10 @@ function victus() {
 		recipe_index.detach();
 		this.set_active_menu("recipe");
 
+		var d = recipes[id].directions.split("\n");
+		var directions = recipe_display.find("#disp_recipe_directions");
+
 		recipe_display.find("#disp_recipe_name").text(recipes[id].name);
-		recipe_display.find("#disp_recipe_directions").text(recipes[id].directions);
 		recipe_display.find("#disp_recipe_yields").text(recipes[id].yields);
 
 		var ingr = recipe_display.find("#disp_recipe_ingredients");
@@ -70,6 +72,12 @@ function victus() {
 			str += recipes[id].ingredients[i];
 			str += "</li>";
 			ingr.append(str);
+		}
+
+		for(var i = 0; i < d.length; ++i) {
+			var p = $("<p></p>");
+			p.text(d[i])
+			directions.append(p);
 		}
 
 		$("#content").append(recipe_display);
