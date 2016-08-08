@@ -9,10 +9,11 @@
     </div>
 
     <div class="form-group">
-        <label for="create_recipe_yields">Yield</label>
+        <label for="create_recipe_yields">Yields</label>
         <input type="text" class="form-control" id ="create_recipe_yields">
     </div>
 
+    <ul id="create_recipe_entered_ingredients" class="list-unstyled"></ul>
     <div class="form-group">
         <label for="create_recipe_ingredients">Ingredients</label>
         <div class="input-group">
@@ -22,7 +23,6 @@
             </div>
         </div>
     </div>
-    <ul id="create_recipe_entered_ingredients" class="list-unstyled"></ul>
 
     <div class="form-group">
         <label for="create_recipe_tags">Tags</label>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <ul id="create_recipe_entered_tags" class="list-unstyled"></ul>
+    <ul id="create_recipe_entered_tags" class="list-unstyled list-inline"></ul>
 </div>
 
 <div class="col-sm-6">
@@ -48,13 +48,6 @@
         </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
+<div class="col-xs-12">
+    <button class="btn btn-primary pull-right" onclick="v.editor.send_recipe()">Submit</button>
+</div>

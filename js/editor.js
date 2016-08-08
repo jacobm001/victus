@@ -3,14 +3,11 @@ function editor() {
 	this.name;
 	this.yields;
 	this.notes;
-	this.ingredients = [];
 	this.directions;
+	this.ingredients = [];
 	this.tags = [];
 	this.ingr_autonum = 0;
 	this.tag_autonum = 0;
-
-	// data to submit
-	this.cleaned_values;
 
 	this.init = function() {
 	};
@@ -93,34 +90,51 @@ function editor() {
 
 	this.get_values = function() {
 		this.name       = $("#create_recipe_name").val();
-		this.yeilds     = $("#create_recipe_yields").val();
+		this.yields     = $("#create_recipe_yields").val();
 		this.notes      = $("#create_recipe_notes").val();
 		this.directions = $("#create_recipe_directions").val();
+		
+		var self = this;
+		$("#create_recipe_entered_ingredients > li").each(function(index) {
+			self.ingredients.push($(this).text());
+		});
+
+		$("#create_recipe_entered_tags > li").each(function(index) {
+			self.tags.push($(this).text());
+		});
 	};
 
 	this.clean_values = function() {
-		var clean_tags = [];
-		var clean_ingrdients = [];
+		var self = this;
 
-		for(var i = 0; i < this.tags.length; i++)
-			clean_tags.push(encodeURIComponent(this.tag[i]));
+		$.each(this.ingredients, function(i, value) {
+			self.ingredients[i] = encodeURIComponent(value);
+		});
 
-		for(var i = 0; i < this.ingredients.length; i++)
-			clean_ingredients.push(encodeURIComponent(this.ingredients[i]));
+		$.each(this.tags, function(i, value) {
+			self.tags[i] = encodeURIComponent(value);
+		});
 
-		this.cleaned_values = {
-			'name':        encodeURIComponent(this.name),
-			'yields':      encodeURIComponent(this.yields),
-			'notes':       encodeURIComponent(this.notes),
-			'directions':  encodeURIComponent(this.directions),
-			'ingredients': clean_ingredients,
-			'tags':        clean_tags
-		};
+		var obj = {
+			'name'        : encodeURIComponent(this.name), 
+			'yields'      : encodeURIComponent(this.yields), 
+			'notes'       : encodeURIComponent(this.notes),
+			'directions'  : encodeURIComponent(this.directions), 
+			'ingredients' : this.ingredients,
+			'tags'        : this.tags
+		}
 
-		this.cleaned_values = JSON.stringify(this.cleaned_values);
+		return JSON.stringify(obj);
 	};
 
 	this.send_recipe = function() {
-		// post the recipe to api
+		this.get_values();
+		
+		var url  = '/api/recipe/create';
+		var data = this.clean_values();
+
+		$.post(url, {'data': data}, function(data) {
+			console.log("posted recipe");
+		});
 	};
 };
