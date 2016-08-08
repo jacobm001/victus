@@ -18,6 +18,11 @@
 				else if(count($this->uri) == 3)
 					$this->get_recipe();
 			}
+			else if($_SERVER['REQUEST_METHOD'] == 'POST') {
+				if(isset($_POST['data'])) {
+					$this->create_recipe($_POST['data']);
+				}
+			}
 		}
 
 		private function get_recipes()
@@ -71,6 +76,11 @@
 			$record_view = "insert into view_log(view_date, view_ip, view_resource) values(CURRENT_TIMESTAMP,?,?)";
 			$stmt = $this->db->prepare($record_view);
 			$stmt->execute(array($_SERVER['REMOTE_ADDR'], $obj));
+		}
+
+		private function create_recipe($obj)
+		{
+			
 		}
 	}
 ?>
