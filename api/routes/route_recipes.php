@@ -80,7 +80,41 @@
 
 		private function create_recipe($obj)
 		{
+			$obj = json_decode($obj);
+
+			$sql = 'insert into recipes(user_id, recipe_name, recipe_notes, recipe_yields, recipe_directions) values(:user, :name, :notes, :yields, :directions);';
 			
+			$user = 1;
+
+			$stmt = $this->db->prepare($sql);
+			$stmt->bindParam(':user', $user);
+			$stmt->bindParam(':name', $obj->name);
+			$stmt->bindParam(':notes', $obj->notes);
+			$stmt->bindParam(':yields', $obj->yields);
+			$stmt->bindParam(':directions', $obj->directions);
+			$stmt->execute();
+
+			$id = $this->db->lastInsertId();
+
+			if( !empty($obj->ingredients) ) {
+				foreach($obj->ingredients as $ingr) {
+					$insert_sql = 'insert into recipe_ingredients(recipe_id, ingredient_name) values(:recipe_id, :ingredient);';
+					$stmt = $this->db->prepare($insert_sql);
+					$stmt->bindParam(':recipe_id', $id);
+					$stmt->bindParam(':ingredient', $ingr);
+					$stmt->execute();
+				}
+			}
+
+			if( !empty($obj->tags) ) {
+				foreach($obj->tags as $tag) {
+					$insert_sql = 'insert into recipe_tags(recipe_id, ingredient_name) values(:recipe_id, :tag);';
+					$stmt = $this->db->prepare($insert_sql);
+					$stmt->bindParam(':recipe_id', $id);
+					$stmt->bindParam(':tag', $tag);
+					$stmt->execute();
+				}
+			}
 		}
 	}
 ?>

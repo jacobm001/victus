@@ -77,6 +77,7 @@
 					new Route_Log($this->uri, $this->db);
 					break;
 				default:
+					echo "Route not found\n";
 					var_dump($this->uri);
 			}
 		}

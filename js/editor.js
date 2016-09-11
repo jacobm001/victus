@@ -130,7 +130,7 @@ function editor() {
 	this.send_recipe = function() {
 		this.get_values();
 		
-		var url  = '/api/recipe/create';
+		var url  = '/api/recipes/create';
 		var data = this.clean_values();
 
 		$.post(url, {'data': data}, function(data) {
