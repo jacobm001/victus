@@ -59,17 +59,17 @@ function victus() {
 		recipe_index.detach();
 		this.set_active_menu("recipe");
 
-		var d = recipes[id].directions.split("\n");
+		var d = decodeURIComponent(recipes[id].directions).split("\n");
 		var directions = recipe_display.find("#disp_recipe_directions");
 
-		recipe_display.find("#disp_recipe_name").text(recipes[id].name);
-		recipe_display.find("#disp_recipe_yields").text(recipes[id].yields);
+		recipe_display.find("#disp_recipe_name").text(decodeURIComponent(recipes[id].name));
+		recipe_display.find("#disp_recipe_yields").text(decodeURIComponent(recipes[id].yields));
 
 		var ingr = recipe_display.find("#disp_recipe_ingredients");
 		ingr.empty("");
 		for(var i = 0; i < recipes[id].ingredients.length; ++i) {
 			var str = "<li>";
-			str += recipes[id].ingredients[i];
+			str += decodeURIComponent(recipes[id].ingredients[i]);
 			str += "</li>";
 			ingr.append(str);
 		}
@@ -96,6 +96,11 @@ function victus() {
 		this.set_active_menu("home");
 		this.set_active_view("recipe_index");
 	};
+
+	this.create_recipe = function() {
+		this.editor.send_recipe();
+		this.disp_list();
+	}
 
 	this.get_partials = function() {
 		$.get("partials/display.html", function(data)
@@ -147,7 +152,7 @@ function victus() {
 				var li = $('<li>');
 				var a  = $('<a>');
 
-				a.append(data[i].name);
+				a.append(decodeURIComponent(data[i].name));
 				a.attr("onclick", "v.disp_recipe(" + i + ")");
 				li.append(a);
 

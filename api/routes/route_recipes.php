@@ -88,10 +88,10 @@
 
 			$stmt = $this->db->prepare($sql);
 			$stmt->bindParam(':user', $user);
-			$stmt->bindParam(':name', $obj->name);
-			$stmt->bindParam(':notes', $obj->notes);
-			$stmt->bindParam(':yields', $obj->yields);
-			$stmt->bindParam(':directions', $obj->directions);
+			$stmt->bindParam(':name', urldecode($obj->name));
+			$stmt->bindParam(':notes', urldecode($obj->notes));
+			$stmt->bindParam(':yields', urldecode($obj->yields));
+			$stmt->bindParam(':directions', urldecode($obj->directions));
 			$stmt->execute();
 
 			$id = $this->db->lastInsertId();
@@ -101,7 +101,7 @@
 					$insert_sql = 'insert into recipe_ingredients(recipe_id, ingredient_name) values(:recipe_id, :ingredient);';
 					$stmt = $this->db->prepare($insert_sql);
 					$stmt->bindParam(':recipe_id', $id);
-					$stmt->bindParam(':ingredient', $ingr);
+					$stmt->bindParam(':ingredient', urldecode($ingr));
 					$stmt->execute();
 				}
 			}
@@ -111,10 +111,12 @@
 					$insert_sql = 'insert into recipe_tags(recipe_id, ingredient_name) values(:recipe_id, :tag);';
 					$stmt = $this->db->prepare($insert_sql);
 					$stmt->bindParam(':recipe_id', $id);
-					$stmt->bindParam(':tag', $tag);
+					$stmt->bindParam(':tag', urldecode($tag));
 					$stmt->execute();
 				}
 			}
+
+			echo "yay";
 		}
 	}
 ?>

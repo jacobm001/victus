@@ -135,6 +135,9 @@ function editor() {
 
 		$.post(url, {'data': data}, function(data) {
 			console.log("posted recipe");
+			return 'yay';
 		});
+
+
 	};
 };
