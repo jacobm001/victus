@@ -58,6 +58,7 @@ function victus() {
 	this.disp_recipe = function(id) {
 		recipe_index.detach();
 		this.set_active_menu("recipe");
+		console.log(recipes[id]);
 
 		var d = decodeURIComponent(recipes[id].directions).split("\n");
 		var directions = recipe_display.find("#disp_recipe_directions");
@@ -72,6 +73,14 @@ function victus() {
 			str += decodeURIComponent(recipes[id].ingredients[i]);
 			str += "</li>";
 			ingr.append(str);
+		}
+
+		var tag = recipe_display.find("#disp_recipe_tags");
+		tag.empty("");
+		for(var i = 0; i < recipes[id].tags.length; ++i) {
+			var li = $("<li></li");
+			li.text(recipes[id].tags[i]);
+			tag.append(li);
 		}
 
 		for(var i = 0; i < d.length; ++i) {

@@ -84,34 +84,40 @@
 
 			$sql = 'insert into recipes(user_id, recipe_name, recipe_notes, recipe_yields, recipe_directions) values(:user, :name, :notes, :yields, :directions);';
 			
-			$user = 1;
+			$user       = 1;
+			$name       = urldecode($obj->name);
+			$notes      = urldecode($obj->notes);
+			$yields     = urldecode($obj->yields);
+			$directions = urldecode($obj->directions);
 
 			$stmt = $this->db->prepare($sql);
 			$stmt->bindParam(':user', $user);
-			$stmt->bindParam(':name', urldecode($obj->name));
-			$stmt->bindParam(':notes', urldecode($obj->notes));
-			$stmt->bindParam(':yields', urldecode($obj->yields));
-			$stmt->bindParam(':directions', urldecode($obj->directions));
+			$stmt->bindParam(':name', $name);
+			$stmt->bindParam(':notes', $notes);
+			$stmt->bindParam(':yields', $yields);
+			$stmt->bindParam(':directions', $directions);
 			$stmt->execute();
 
 			$id = $this->db->lastInsertId();
 
 			if( !empty($obj->ingredients) ) {
 				foreach($obj->ingredients as $ingr) {
+					$ingr = urldecode($ingr);
 					$insert_sql = 'insert into recipe_ingredients(recipe_id, ingredient_name) values(:recipe_id, :ingredient);';
 					$stmt = $this->db->prepare($insert_sql);
 					$stmt->bindParam(':recipe_id', $id);
-					$stmt->bindParam(':ingredient', urldecode($ingr));
+					$stmt->bindParam(':ingredient', $ingr);
 					$stmt->execute();
 				}
 			}
 
 			if( !empty($obj->tags) ) {
 				foreach($obj->tags as $tag) {
-					$insert_sql = 'insert into recipe_tags(recipe_id, ingredient_name) values(:recipe_id, :tag);';
+					$tag = urldecode($tag);
+					$insert_sql = 'insert into recipe_tags(recipe_id, tag_name) values(:recipe_id, :tag);';
 					$stmt = $this->db->prepare($insert_sql);
 					$stmt->bindParam(':recipe_id', $id);
-					$stmt->bindParam(':tag', urldecode($tag));
+					$stmt->bindParam(':tag', $tag);
 					$stmt->execute();
 				}
 			}

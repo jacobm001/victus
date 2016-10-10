@@ -23,7 +23,7 @@
 		public function set_tag($tag_str)
 		{
 			if( $tag_str != "" )
-				$this->tags = array_unique(explode('||', $tag_str));
+				$this->tags = explode('||', $tag_str);
 		}
 
 		public function add_tag($tag)
