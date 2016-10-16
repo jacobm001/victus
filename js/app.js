@@ -3,6 +3,7 @@ function victus() {
 	this.recipe_index;
 	this.recipe_display;
 	this.recipe_create;
+	this.last_view = "";	
 	this.user = new auth();
 	this.editor = new editor();
 
@@ -58,6 +59,7 @@ function victus() {
 	this.disp_recipe = function(id) {
 		recipe_index.detach();
 		this.set_active_menu("recipe");
+		this.last_view = id;
 		console.log(recipes[id]);
 
 		var d = decodeURIComponent(recipes[id].directions).split("\n");
@@ -104,6 +106,11 @@ function victus() {
 	this.disp_list = function() {
 		this.set_active_menu("home");
 		this.set_active_view("recipe_index");
+
+		if( this.last_view != "" ) {
+			$("html, body").animate({scrollTop: $("#recipe_" + this.last_view).offset().top - $("#navbar").height()}, 0);
+			this.last_view = "";
+		}
 	};
 
 	this.create_recipe = function() {
@@ -170,6 +177,7 @@ function victus() {
 				else if( j >= 25 )
 					li.addClass("col-sm-12 col-sm-6 col-md-4 col-lg-4");
 
+				li.attr("id", "recipe_" + i);
 				c.find('.list-unstyled').append(li);
 
 				if( i == data.length-1 || data[i+1].name.charAt(0) != r ) {
