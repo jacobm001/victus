@@ -75,6 +75,12 @@ create table settings (
 	setting_desc text,
 	setting_value text
 );
+create table routes (
+	route_id integer primary key autoincrement,
+	route text,
+	route_priviledge,
+	foreign key(route_priviledge) references priviledges(priviledge_id)
+);
 
 create index user_auth on users(username, password)
 create index recipe_tags_find_id on recipe_tags(recipe_id);
